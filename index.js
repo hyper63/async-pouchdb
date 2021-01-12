@@ -24,7 +24,7 @@ const schema = z.object({
 
 const validate = compose(
   eitherToAsync,
-  ifElse(prop('success'), compose(Right, prop('data')), compose(Left, prop('issues'))),
+  ifElse(prop('success'), compose(Right, prop('data')), compose(Left, prop('error'))),
   schema.safeParse
 )
 
