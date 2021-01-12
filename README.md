@@ -21,7 +21,7 @@ npm install async-pouchdb
 ## Usage in NodeJS
 
 ``` js
-const createPouchdb = require('async-pouchdb')
+import { default as createPouchdb } from 'async-pouchdb'
 const pouchdb = createPouchdb()
 const db = pouchdb('http://localhost:5984/db')
 db.allDocs()
@@ -41,11 +41,14 @@ the plugin function. `{ name, driver }`.
 ## websql example
 
 ``` js
-const createPouchdb = require('async-pouchdb')
+import { default as createPouchdb } from 'async-pouchdb'
+import pouchdbAdapterNodeWebsql from 'pouchdb-adapter-node-websql'
+
 const pouchdb = createPouchdb({ 
   name: 'websql', 
-  driver: require('pouchdb-adapter-node-websql')
+  driver: pouchdbAdapterNodeWebsql 
 })
+
 const db = pouchdb('foo.db')
 db.allDocs()
   .fork(
@@ -58,10 +61,13 @@ db.allDocs()
 
 
 ``` js
+import { default as createPouchdb } from 'async-pouchdb'
+import pouchdbAdapterMemory from 'pouchdb-adapter-memory'
+
 const createPouchdb = require('async-pouchdb')
 const pouchdb = createPouchdb({ 
   name: 'memory', 
-  driver: require('pouchdb-adapter-memory')
+  driver: pouchdbAdapterMemory 
 })
 const db = pouchdb('foo.db')
 db.allDocs()
