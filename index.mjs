@@ -5,11 +5,12 @@ import pouchdbFind from 'pouchdb-find'
 import pouchdbAdapterHttp from 'pouchdb-adapter-http'
 
 import ramda from 'ramda'
-import crocks from 'crocks'
+import Async from 'crocks/Async/index.js'
+import Either from 'crocks/Either/index.js'
+import eitherToAsync from 'crocks/Async/eitherToAsync.js'
 import zod from 'zod'
 
 const { compose, curry, ifElse, lensProp, over, prop, set } = ramda
-const { Async, Either, eitherToAsync } = crocks
 
 // initialize plugins
 pouchdb.plugin(pouchdbMapreduce)
