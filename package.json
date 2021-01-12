@@ -1,7 +1,7 @@
 {
   "name": "async-pouchdb",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "index.mjs",
   "license": "MIT",
   "dependencies": {
     "crocks": "^0.12.4",
@@ -19,7 +19,9 @@
     "tape": "^5.1.1"
   },
   "scripts": {
-    "test": "tape test/index_test.js",
+    "test": "node test/index_test.mjs",
     "watch": "npx nodemon test/index_test.js -q -x 'clear && node'"
-  }
+  },
+  "repository": "git@github.com:hyper63/async-pouchdb.git",
+  "author": "Tom Wilson <twilson63@gmail.com>"
 }
