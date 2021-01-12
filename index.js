@@ -46,4 +46,5 @@ module.exports = (adapter=defaultAdapter) => (name, options={}) =>
     .map(asyncify('explain'))
     .map(asyncify('deleteIndex'))
     .map(asyncify('getIndexes'))
+    .map(asyncify('destroy'))
 
