@@ -23,7 +23,7 @@ npm install async-pouchdb
 ``` js
 import { default as createPouchdb } from 'async-pouchdb'
 const pouchdb = createPouchdb()
-const db = pouchdb('http://localhost:5984/db')
+const db = await pouchdb('http://localhost:5984/db').toPromise()
 db.allDocs()
   .fork(
     err => console.log(err),
@@ -49,7 +49,7 @@ const pouchdb = createPouchdb({
   driver: pouchdbAdapterNodeWebsql 
 })
 
-const db = pouchdb('foo.db')
+const db = await pouchdb('foo.db').toPromise()
 db.allDocs()
   .fork(
     err => console.log(err),
@@ -69,7 +69,8 @@ const pouchdb = createPouchdb({
   name: 'memory', 
   driver: pouchdbAdapterMemory 
 })
-const db = pouchdb('foo.db')
+const db = await pouchdb('foo.db').toPromise()
+
 db.allDocs()
   .fork(
     err => console.log(err),

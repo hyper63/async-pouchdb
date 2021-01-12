@@ -56,5 +56,4 @@ export default (adapter=defaultAdapter) => (name, options={}) =>
     .map(asyncify('explain'))
     .map(asyncify('deleteIndex'))
     .map(asyncify('getIndexes'))
-    .toPromise()
 

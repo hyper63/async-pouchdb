@@ -25,7 +25,7 @@ const pouchdb = createPouchdb({
 })
 
 test('async-pouchdb', async t => {
-  const db = await pouchdb('foo')
+  const db = await pouchdb('foo').toPromise()
   const result = await db.info().toPromise()
 
   t.equals(result.db_name, 'foo')
