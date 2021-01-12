@@ -1,24 +1,13 @@
-import pouchdb from 'pouchdb-core'
-import pouchdbMapreduce from 'pouchdb-mapreduce'
-import pouchdbReplication from 'pouchdb-replication'
-import pouchdbFind from 'pouchdb-find'
-import pouchdbAdapterHttp from 'pouchdb-adapter-http'
+const pouchdb = require('pouchdb-core')
+pouchdb.plugin(require('pouchdb-mapreduce'))
+pouchdb.plugin(require('pouchdb-replication'))
+pouchdb.plugin(require('pouchdb-find'))
 
-import ramda from 'ramda'
-import Async from 'crocks/Async/index.js'
-import Either from 'crocks/Either/index.js'
-import eitherToAsync from 'crocks/Async/eitherToAsync.js'
-import zod from 'zod'
+const defaultAdapter = { name: 'http', driver: require('pouchdb-adapter-http')} 
 
-const { compose, curry, ifElse, lensProp, over, prop, set } = ramda
-
-// initialize plugins
-pouchdb.plugin(pouchdbMapreduce)
-pouchdb.plugin(pouchdbReplication)
-pouchdb.plugin(pouchdbFind)
-
-const defaultAdapter = { name: 'http', driver: pouchdbAdapterHttp } 
-
+const z = require('zod')
+const { compose, curry, ifElse, lensProp, over, prop } = require('ramda')
+const { Async, Either, eitherToAsync } = require('crocks')
 const { Left, Right } = Either
 
 const asyncify = curry(
@@ -28,9 +17,9 @@ const asyncify = curry(
     db
   )
 )
-const schema = zod.object({
-  name: zod.string(),
-  driver: zod.any()
+const schema = z.object({
+  name: z.string(),
+  driver: z.any()
 })
 
 const validate = compose(
@@ -40,7 +29,7 @@ const validate = compose(
 )
 
 
-export default (adapter=defaultAdapter) => (name, options={}) =>
+module.exports = (adapter=defaultAdapter) => (name, options={}) =>
   Async.of(adapter)
     .chain(validate)
     .map(a => a ? pouchdb.plugin(a.driver) : pouchdb) // add adapter if exists

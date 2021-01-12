@@ -19,7 +19,7 @@
     "tape": "^5.1.1"
   },
   "scripts": {
-    "test": "node test/index_test.mjs",
+    "test": "node test/index_test.js",
     "watch": "npx nodemon test/index_test.js -q -x 'clear && node'"
   },
   "repository": "git@github.com:hyper63/async-pouchdb.git",

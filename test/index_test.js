@@ -1,6 +1,6 @@
-import { default as test } from 'tape'
-import { default as createPouchdb } from '../index.mjs'
-import pouchdbAdapterMemory from 'pouchdb-adapter-memory'
+const test = require('tape')
+
+const createPouchdb = require('../')
 
 /*
  * default driver is http
@@ -21,7 +21,7 @@ const pouchdb = createPouchdb({
 // memory driver
 const pouchdb = createPouchdb({
   name: 'memory',
-  driver: pouchdbAdapterMemory 
+  driver: require('pouchdb-adapter-memory')
 })
 
 test('async-pouchdb', async t => {
